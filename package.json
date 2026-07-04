@@ -7,14 +7,37 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
-    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
-    "./engine/*": { "types": "./dist/engine/*.d.ts", "import": "./dist/engine/*.js" },
-    "./game/*": { "types": "./dist/game/*.d.ts", "import": "./dist/game/*.js" }
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./engine/*": {
+      "types": "./dist/engine/*.d.ts",
+      "import": "./dist/engine/*.js"
+    },
+    "./game/*": {
+      "types": "./dist/game/*.d.ts",
+      "import": "./dist/game/*.js"
+    }
   },
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
-    "build": "tsc -p tsconfig.build.json"
+    "build": "tsc -p tsconfig.build.json",
+    "test": "vitest run"
   },
-  "repository": { "type": "git", "url": "https://github.com/pajama-studio/pajama-studio.git", "directory": "packages/prefab-core" },
-  "publishConfig": { "access": "public" }
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pajama-studio/pajama-studio.git",
+    "directory": "packages/prefab-core"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "vitest": "^3.0.0"
+  }
 }
