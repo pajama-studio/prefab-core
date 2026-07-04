@@ -5,4 +5,4 @@
  * engine/runtime/editor consumer keeps its import path; kitchen types are
  * structurally identical to the kit's (see prefab-kit/types.ts).
  */
-export * from "../prefab-kit/transform";
+export * from "@pajama-studio/prefab-kit";

@@ -53,5 +53,8 @@
     "kitchen",
     "simulation",
     "typescript"
-  ]
+  ],
+  "dependencies": {
+    "@pajama-studio/prefab-kit": "^0.4.1"
+  }
 }
