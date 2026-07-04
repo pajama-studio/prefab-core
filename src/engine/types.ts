@@ -110,6 +110,10 @@ export interface Components {
    *  When omitted, pickability is derived (a portable item with no station).
    *  `true` forces grabbable, `false` pins it as fixed scenery. */
   pickable?: boolean;
+  /** When explicitly false, the play crosshair ignores this entity entirely —
+   *  no hover outline, no name, and rays pass through to whatever is behind
+   *  (e.g. an egg carton that should never steal focus from its eggs). */
+  hoverable?: boolean;
   /** Physics body in play. `auto` (default) → dynamic if pickable, else fixed.
    *  `dynamic` simulates (gravity/collisions/tumble), `fixed` is immovable
    *  scenery (things rest on it), `none` is pure visual — no body or collider,
