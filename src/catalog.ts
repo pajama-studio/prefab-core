@@ -40,6 +40,7 @@ export const COMPONENT_CATALOG = {
   sliceable: { doc: "Cuttable along an axis at an offset; `cut` marks the separation done.", verbs: ["cut"] },
   ingredient: { doc: "Food item with a prep state machine (whole → cut → diced; any stage → cooked → burnt). See game/ingredients catalog.", verbs: ["cut", "cook"] },
   pickable: { doc: "Player can pick this entity up (explicit boolean — roots must declare it).", verbs: ["pick-up", "drop", "throw"] },
+  hoverable: { doc: "Whether the play crosshair may target this entity for hover, outline, and interaction routing.", verbs: [] },
   physics: { doc: "Rapier body mode: auto | dynamic | fixed | none.", verbs: [] },
   snapToSurface: { doc: "Dropped items settle onto the surface below instead of floating.", verbs: [] },
   openable: { doc: "Door/lid hinge state (open/close), animated from the GLB's pivot.", verbs: ["open", "close"] },
