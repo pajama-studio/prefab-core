@@ -6,7 +6,7 @@ import {
   expandPrefabInstance as kitExpandInstance,
   expandEntities as kitExpandEntities,
   type ExpandOptions,
-} from "@pajama-studio/prefab-kit";
+} from "../schema/index.js";
 
 /**
  * Kitchen Lab's adapter over the standalone prefab-kit framework

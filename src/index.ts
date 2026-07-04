@@ -12,6 +12,8 @@ export { migrateDef } from "./engine/migrate.js";
 export { createDefaultGameDef } from "./engine/defaults.js";
 // The Blueprint mechanism is its own published package — re-exported as a
 // namespace for convenience (names clash with engine/types otherwise).
-export * as prefabKit from "@pajama-studio/prefab-kit";
+export * as prefabKit from "./schema/index.js";
 export { COMPONENT_CATALOG, ACTION_CATALOG, catalog } from "./catalog.js";
 export type { ComponentDoc } from "./catalog.js";
+export { definePack, assembleSystems } from "./pack.js";
+export type { DomainPack } from "./pack.js";

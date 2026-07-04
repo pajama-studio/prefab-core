@@ -1,6 +1,6 @@
 {
   "name": "@pajama-studio/prefab-core",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "General-purpose prefab game runtime: prefab schema, deterministic step() over pluggable system packs, extensible trigger/action dispatch. Domain packs plug in on top.",
   "license": "MIT",
   "type": "module",
@@ -18,6 +18,10 @@
     "./game/*": {
       "types": "./dist/game/*.d.ts",
       "import": "./dist/game/*.js"
+    },
+    "./schema": {
+      "types": "./dist/schema/index.d.ts",
+      "import": "./dist/schema/index.js"
     }
   },
   "files": [
@@ -53,8 +57,5 @@
     "kitchen",
     "simulation",
     "typescript"
-  ],
-  "dependencies": {
-    "@pajama-studio/prefab-kit": "^0.4.1"
-  }
+  ]
 }
