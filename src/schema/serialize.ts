@@ -11,6 +11,14 @@ import type { CoreComponents, KitEntity, KitPrefab } from "./types.js";
 export const PACKAGE_FORMAT = "pajama-prefab-package";
 export const PACKAGE_VERSION = 1;
 
+/** Format-version upgrade chain, applied ON READ (never written back
+ *  silently): when PACKAGE_VERSION bumps to N, register a step under N-1
+ *  that lifts a version-(N-1) package to N. Colleagues' stored prefabs keep
+ *  loading forever; re-saving naturally persists the current format. */
+export const PACKAGE_MIGRATIONS: Record<number, (pkg: Record<string, unknown>) => Record<string, unknown>> = {
+  // e.g. 1: (pkg) => ({ ...pkg, formatVersion: 2, prefabs: … })
+};
+
 // The package holds prefabs of ANY host domain — opaque component payloads.
 type AnyPrefab = KitPrefab<CoreComponents<never>>;
 
@@ -101,10 +109,20 @@ export function parsePrefabPackage(input: unknown): { ok: true; prefabs: AnyPref
   if (typeof pkg.formatVersion !== "number" || pkg.formatVersion > PACKAGE_VERSION) {
     return { ok: false, error: `unsupported format version ${pkg.formatVersion} (this app reads ≤ ${PACKAGE_VERSION})` };
   }
-  if (!Array.isArray(pkg.prefabs) || pkg.prefabs.length === 0) return { ok: false, error: "package has no prefabs" };
-  for (const p of pkg.prefabs) {
+  // migrate-on-read: lift older packages step by step to the current format
+  let lifted = pkg as Record<string, unknown>;
+  while ((lifted.formatVersion as number) < PACKAGE_VERSION) {
+    const step = PACKAGE_MIGRATIONS[lifted.formatVersion as number];
+    if (!step) {
+      return { ok: false, error: `no migration from format version ${lifted.formatVersion}` };
+    }
+    lifted = step(lifted);
+  }
+  const migrated = lifted as typeof pkg;
+  if (!Array.isArray(migrated.prefabs) || migrated.prefabs.length === 0) return { ok: false, error: "package has no prefabs" };
+  for (const p of migrated.prefabs) {
     const errs = validatePrefab(p);
     if (errs.length) return { ok: false, error: `prefab "${(p as AnyPrefab)?.id ?? "?"}": ${errs.join("; ")}` };
   }
-  return { ok: true, prefabs: pkg.prefabs as AnyPrefab[] };
+  return { ok: true, prefabs: migrated.prefabs as AnyPrefab[] };
 }
