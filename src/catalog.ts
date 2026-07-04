@@ -11,7 +11,7 @@ import type { Components, TriggerAction } from "./engine/types.js";
  * drift from the code.
  *
  * NOTE (0.2): kitchen-domain components still live in the central Components
- * type; the 0.3 milestone moves them behind prefab-kit's CoreComponents<C>
+ * type; the 0.3 milestone moves them behind prefab-core's CoreComponents<C>
  * generic so domains own their component vocabularies end to end.
  */
 export interface ComponentDoc {

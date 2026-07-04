@@ -2,8 +2,9 @@
 
 A **general-purpose** prefab game runtime in pure TypeScript:
 
-- **Prefab schema** — entities as component recipes, linked templates with
-  instances/overrides/params/actions (via `@pajama-studio/prefab-kit`).
+- **Prefab schema** — package files, entities as component recipes, linked
+  templates with instances/overrides/params/actions, and pluggable
+  package-aware stores.
 - **Deterministic engine** — `createEngine(def)` + `step(state, dtMs, inputs,
   systems)`; no DOM, no Three.js; runs in Node and the browser alike.
 - **Pluggable system packs** — the core ships domain-agnostic systems
@@ -17,6 +18,20 @@ Pajama Studio's kitchen gameplay (cooking, washing, pouring, real-fluid
 sinks) is one such domain pack, built on this runtime.
 
 The visual runtime and the prefab editor UI live in `@pajama-studio/prefab-studio`.
+
+## Store contract
+
+`PrefabPackage` is the durable unit: the first prefab is the root and later
+entries are nested dependencies. `PrefabStore` reads and writes full packages
+through `loadPackage`/`savePackage`, while `load`/`save` remain single-root
+compatibility helpers for simple editors. Asset binaries are not embedded;
+packages keep references and a derived `assets` manifest.
+
+Prefab packages are self-contained declarations: they include prefab graphs,
+components, params, actions, triggers, overrides, asset references, and
+`requirements.packs` for the runtime/domain packs needed to interpret them.
+They do not embed arbitrary JavaScript functions, compiled systems, or GLB/image
+binary payloads.
 
 ## Stored-data compatibility policy
 

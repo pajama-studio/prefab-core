@@ -1,4 +1,4 @@
-/** prefab-kit public API — see README.md for the adoption guide. */
+/** prefab schema public API — see README.md for the adoption guide. */
 export * from "./types.js";
 export * from "./transform.js";
 export * from "./expand.js";
