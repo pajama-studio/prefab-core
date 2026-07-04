@@ -27,6 +27,102 @@ export interface PrefabPackage {
   formatVersion: number;
   /** The prefab the package is "about" (first entry), then its dependencies. */
   prefabs: AnyPrefab[];
+  /** Runtime packs required to interpret the package's declared components/actions. */
+  requirements?: PrefabPackageRequirements;
+  /** Derived manifest of external/library asset references used by the package. */
+  assets?: PrefabPackageAsset[];
+}
+
+export interface PrefabPackageRequirements {
+  packs?: PrefabPackagePackRequirement[];
+}
+
+export interface PrefabPackagePackRequirement {
+  id: string;
+  version?: string;
+}
+
+export type PrefabPackageAssetKind = "library" | "pajama" | "external";
+export type PrefabPackageAssetField = "assetRef.modelUrl" | "assetRef.thumbnailUrl" | "primitive.mapUrl";
+
+export interface PrefabPackageAsset {
+  prefabId: string;
+  entityId: string;
+  field: PrefabPackageAssetField;
+  url: string;
+  kind: PrefabPackageAssetKind;
+  assetId?: string;
+  slug?: string;
+}
+
+function hasUnsafeUrlCharacters(url: string): boolean {
+  return /[\u0000-\u001f\u007f\s]/.test(url);
+}
+
+export function classifyPrefabAssetUrl(url: string, asset?: { id?: string; slug?: string }): PrefabPackageAssetKind {
+  if (asset?.id || asset?.slug) return "library";
+  try {
+    const u = new URL(url);
+    return u.hostname === "assets.pajama.studio" ? "pajama" : "external";
+  } catch {
+    return "external";
+  }
+}
+
+function addAssetRef(
+  out: PrefabPackageAsset[],
+  prefabId: string,
+  entityId: string,
+  field: PrefabPackageAssetField,
+  value: unknown,
+  asset?: { id?: string; slug?: string },
+) {
+  if (typeof value !== "string" || value.trim() === "") return;
+  out.push({
+    prefabId,
+    entityId,
+    field,
+    url: value,
+    kind: classifyPrefabAssetUrl(value, asset),
+    ...(asset?.id ? { assetId: asset.id } : {}),
+    ...(asset?.slug ? { slug: asset.slug } : {}),
+  });
+}
+
+export function collectPrefabPackageAssets(pkg: Pick<PrefabPackage, "prefabs">): PrefabPackageAsset[] {
+  const out: PrefabPackageAsset[] = [];
+  for (const prefab of pkg.prefabs) {
+    for (const entity of prefab.entities) {
+      const assetRef = (entity as unknown as { assetRef?: { id?: string; slug?: string; modelUrl?: unknown; thumbnailUrl?: unknown } }).assetRef;
+      const components = entity.components as Record<string, unknown>;
+      const primitive = components.primitive as { mapUrl?: unknown } | undefined;
+      addAssetRef(out, prefab.id, entity.id, "assetRef.modelUrl", assetRef?.modelUrl, assetRef);
+      addAssetRef(out, prefab.id, entity.id, "assetRef.thumbnailUrl", assetRef?.thumbnailUrl, assetRef);
+      addAssetRef(out, prefab.id, entity.id, "primitive.mapUrl", primitive?.mapUrl);
+    }
+  }
+  return out;
+}
+
+export function withPrefabPackageAssetManifest(pkg: PrefabPackage): PrefabPackage {
+  return { ...pkg, assets: collectPrefabPackageAssets(pkg) };
+}
+
+export function validatePrefabPackageAssetUrls(pkg: Pick<PrefabPackage, "prefabs">): string[] {
+  const errs: string[] = [];
+  for (const asset of collectPrefabPackageAssets(pkg)) {
+    if (hasUnsafeUrlCharacters(asset.url)) {
+      errs.push(`${asset.prefabId}/${asset.entityId} ${asset.field} has unsafe asset url characters`);
+      continue;
+    }
+    try {
+      const url = new URL(asset.url);
+      if (url.protocol !== "https:") errs.push(`${asset.prefabId}/${asset.entityId} ${asset.field} must use https`);
+    } catch {
+      errs.push(`${asset.prefabId}/${asset.entityId} ${asset.field} is not a valid asset url`);
+    }
+  }
+  return errs;
 }
 
 /** Structural errors that make a prefab unusable. Empty array = valid. */
@@ -91,11 +187,11 @@ export function packPrefab<C extends CoreComponents<C>, E extends KitEntity<C>>(
   const deps = collectPrefabDeps(prefabId, prefabsById)
     .map((id) => prefabsById[id])
     .filter((p): p is KitPrefab<C, E> => !!p);
-  return {
+  return withPrefabPackageAssetManifest({
     format: PACKAGE_FORMAT,
     formatVersion: PACKAGE_VERSION,
     prefabs: [root, ...deps] as unknown as AnyPrefab[],
-  };
+  });
 }
 
 /** Parse + validate a package (accepts a JSON string or a parsed object). */

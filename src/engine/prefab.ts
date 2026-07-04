@@ -9,8 +9,8 @@ import {
 } from "../schema/index.js";
 
 /**
- * Kitchen Lab's adapter over the standalone prefab-kit framework
- * (`src/lib/prefab-kit` — see its README). The kit owns expansion (instances,
+ * Kitchen Lab's adapter over the standalone prefab-core framework. The core
+ * owns expansion (instances,
  * per-instance overrides, exposed params, recursive nesting, depth cap); this
  * module binds it to the kitchen domain:
  * - the `remapComponentRefs` hook scopes kitchen-owned cross-entity refs

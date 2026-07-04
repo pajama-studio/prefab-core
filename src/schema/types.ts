@@ -1,5 +1,5 @@
 /**
- * prefab-kit — a standalone, serializable linked-prefab (Blueprint) framework.
+ * prefab-core — a standalone, serializable linked-prefab (Blueprint) framework.
  *
  * Domain-agnostic: the kit knows THREE component fields (`transform`, `attach`,
  * `prefabInstance`) and treats everything else in `components` as opaque data
