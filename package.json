@@ -1,0 +1,20 @@
+{
+  "name": "@pajama-studio/prefab-core",
+  "version": "0.1.0",
+  "description": "Pajama Studio prefab core — the pure-TS kitchen game engine: prefab schema, component systems, deterministic step().",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
+    "./engine/*": { "types": "./dist/engine/*.d.ts", "import": "./dist/engine/*.js" },
+    "./game/*": { "types": "./dist/game/*.d.ts", "import": "./dist/game/*.js" }
+  },
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json"
+  },
+  "repository": { "type": "git", "url": "https://github.com/pajama-studio/pajama-studio.git", "directory": "packages/prefab-core" },
+  "publishConfig": { "access": "public" }
+}
