@@ -9,3 +9,5 @@ export { getIngredient, cutState } from "./game/ingredients";
 // prefab-kit re-exports name-clash with engine/types (Transform, PrefabParam…)
 // — consumers import the kit namespace explicitly.
 export * as prefabKit from "./prefab-kit";
+export { COMPONENT_CATALOG, ACTION_CATALOG, catalog } from "./catalog";
+export type { ComponentDoc } from "./catalog";
