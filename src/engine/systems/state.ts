@@ -1,4 +1,4 @@
-import type { System } from "./cooking.js";
+import type { System } from "../system.js";
 
 export const stateSystem: System = {
   id: "state",

@@ -1,6 +1,13 @@
 import type { GameDef, GameEvent, RuntimeEntity, TriggerAction } from "../types.js";
-import { resolveDish } from "./cookingPot.js";
 import { instanceEntityId } from "../prefab.js";
+
+/** Domain packs register handlers for their own action kinds (e.g. the
+ *  kitchen's mixHolder) — the core executor stays domain-agnostic. */
+type ActionHandler = (st: ActionState, def: GameDef, a: never) => ActionState;
+const EXTRA_ACTIONS = new Map<string, ActionHandler>();
+export function registerActionHandler(kind: string, handler: ActionHandler): void {
+  EXTRA_ACTIONS.set(kind, handler);
+}
 
 /**
  * The single executor for TriggerActions — shared by the trigger system
@@ -96,24 +103,6 @@ export function applyTriggerAction(st: ActionState, def: GameDef, a: TriggerActi
       if (had && had.open !== a.open) st.events = [...st.events, { type: "doorToggled", entityId: a.entityId, open: a.open }];
       return st;
     }
-    case "mixHolder": {
-      const e = st.entities[a.entityId];
-      const holder = e?.components.holder;
-      if (!e || !holder || holder.held.length < 2) return st;
-      const prep = holder.held
-        .map((hid) => st.entities[hid]?.components.ingredient)
-        .filter((i): i is NonNullable<typeof i> => !!i)
-        .map((i) => ({ type: i.type, state: i.state }));
-      if (prep.length < 2) return st;
-      const dish = resolveDish(def.recipes ?? [], prep);
-      if (!dish) return st;
-      return {
-        ...st,
-        entities: { ...st.entities, [a.entityId]: { ...e, components: { ...e.components, holder: { ...holder, dish } } } },
-        events: [...st.events, { type: "dishMade", dish }],
-        changed: true,
-      };
-    }
     case "prefabAction": {
       if (depth > 2) return st; // workstation → nested part → step (no deeper)
       const instance = st.entities[a.entityId];
@@ -130,7 +119,11 @@ export function applyTriggerAction(st: ActionState, def: GameDef, a: TriggerActi
       }
       return st;
     }
-    default:
+    default: {
+      // domain packs (kitchen-kit etc.) handle their registered kinds
+      const extra = EXTRA_ACTIONS.get((a as { kind: string }).kind);
+      if (extra) return extra(st, def, a as never);
       return st;
+    }
   }
 }

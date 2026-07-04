@@ -1,18 +1,17 @@
 import type { EngineState, GameDef, GameEvent, Input, Prefab, RuntimeEntity } from "./types.js";
 import { expandEntities } from "./prefab.js";
-import { inputSystem } from "./systems/input.js";
-import { interactSystem } from "./systems/interact.js";
-import { cookingSystem, type System } from "./systems/cooking.js";
-import { cookingPotSystem } from "./systems/cookingPot.js";
-import { washingSystem } from "./systems/washing.js";
+import type { System } from "./system.js";
 import { timerSystem } from "./systems/timer.js";
 import { stateSystem } from "./systems/state.js";
-import { fluidSystem } from "./systems/fluid.js";
 import { prefabActionSystem } from "./systems/prefabAction.js";
 import { triggerSystem } from "./systems/trigger.js";
 
 // triggerSystem runs last so it sees the events emitted by the other systems.
-export const SYSTEMS: System[] = [inputSystem, interactSystem, cookingSystem, cookingPotSystem, washingSystem, timerSystem, stateSystem, fluidSystem, prefabActionSystem, triggerSystem];
+/** Domain-agnostic default pipeline. Domains prepend their own systems via
+ *  the `systems` parameter of createEngine/step (e.g. kitchen-kit's pack). */
+export const CORE_SYSTEMS: System[] = [timerSystem, stateSystem, prefabActionSystem, triggerSystem];
+/** @deprecated import CORE_SYSTEMS, or a domain pack (kitchen-kit). */
+export const SYSTEMS = CORE_SYSTEMS;
 
 export function createEngine(def: GameDef): EngineState {
   const entities: Record<string, RuntimeEntity> = {};
@@ -37,7 +36,7 @@ export function createEngine(def: GameDef): EngineState {
   return { def, timeMs: 0, entities, events: [], score: 0, hand: null, pockets: [null, null, null], discovered: [] };
 }
 
-export function step(state: EngineState, dtMs: number, inputs: Input[]): EngineState {
+export function step(state: EngineState, dtMs: number, inputs: Input[], systems: System[] = CORE_SYSTEMS): EngineState {
   const tick = state.def.sim.tickMs;
   let current: EngineState = state;
   let remaining = dtMs;
@@ -52,7 +51,7 @@ export function step(state: EngineState, dtMs: number, inputs: Input[]): EngineS
     // Seed a one-shot `start` event on the very first tick of a fresh run.
     const seed: GameEvent[] = firstTick && state.timeMs === 0 ? [{ type: "start" }] : [];
     current = { ...current, events: seed };
-    current = SYSTEMS.reduce((s, sys) => sys.step(s, slice, tickInputs), current);
+    current = systems.reduce((s, sys) => sys.step(s, slice, tickInputs), current);
     all.push(...current.events);
     current = { ...current, timeMs: current.timeMs + slice };
     remaining -= slice;

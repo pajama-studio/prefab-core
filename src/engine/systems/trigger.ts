@@ -1,4 +1,4 @@
-import type { System } from "./cooking.js";
+import type { System } from "../system.js";
 import type { EngineState, GameEvent, TriggerWhen } from "../types.js";
 import { applyTriggerAction } from "./actions.js";
 

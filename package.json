@@ -1,7 +1,7 @@
 {
   "name": "@pajama-studio/prefab-core",
-  "version": "0.1.2",
-  "description": "Pajama Studio prefab core — the pure-TS kitchen game engine: prefab schema, component systems, deterministic step().",
+  "version": "0.2.0",
+  "description": "General-purpose prefab game runtime: prefab schema, deterministic step() over pluggable system packs, extensible trigger/action dispatch. Domain packs plug in on top.",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",

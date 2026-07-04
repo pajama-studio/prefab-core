@@ -9,6 +9,10 @@ import type { Components, TriggerAction } from "./engine/types.js";
  * make the catalog EXHAUSTIVE BY CONSTRUCTION: adding a component or action
  * without documenting it here is a compile error, so the catalog can never
  * drift from the code.
+ *
+ * NOTE (0.2): kitchen-domain components still live in the central Components
+ * type; the 0.3 milestone moves them behind prefab-kit's CoreComponents<C>
+ * generic so domains own their component vocabularies end to end.
  */
 export interface ComponentDoc {
   /** One-line semantic meaning, written for an agent composing prefabs. */

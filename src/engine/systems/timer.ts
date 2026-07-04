@@ -1,4 +1,4 @@
-import type { System } from "./cooking.js";
+import type { System } from "../system.js";
 import type { GameEvent } from "../types.js";
 
 export const timerSystem: System = {
