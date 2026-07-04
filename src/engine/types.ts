@@ -73,7 +73,7 @@ export interface Components {
    *  runtime renders the stream ending on the first surface below (splash
    *  there), and systems/fluid fills any `fillable` container in the column.
    *  Click in Play to turn on/off. `rate` = level units per second (default 1). */
-  fluidSource?: { liquid: "water"; on: boolean; rate?: number   /** Visual width multiplier for the droplet jet (1 = default). */
+  fluidSource?: { liquid: "water" | "ketchup" | "mustard"; on: boolean; rate?: number   /** Visual width multiplier for the droplet jet (1 = default). */
     jetSize?: number;
     /** Pool droplet fineness (1 = default; smaller = finer grain). */
     grain?: number;
@@ -85,6 +85,9 @@ export interface Components {
     jetSpeed?: number;
     /** WebGPU water shading level 0-3 (0 flat → 3 full toon; debug bisect). */
     shadeMode?: number;
+    /** Stream/droplet tint (CSS hex). Defaults to water blue; condiments set
+     *  their sauce colour here (ketchup red, mustard yellow). */
+    color?: string;
   };
   /** A container that catches liquid from a fluidSource above. `level` rises
    *  0→capacity while being filled; the runtime draws the liquid surface. */
