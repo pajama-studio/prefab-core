@@ -373,6 +373,10 @@ export type Input =
   | { type: "toggleOpen"; entityId: string }
   /** Turn a faucet/tap (fluidSource) on or off. */
   | { type: "toggleFluid"; entityId: string }
+  /** Reposition an entity WITHOUT dropping it from the hand — keeps the engine
+   *  transform tracking the aim point while a held squeeze bottle pours, so
+   *  the fluid system fills the container actually under the stream. */
+  | { type: "moveEntity"; entityId: string; position: { x: number; y: number; z: number } }
   /** Invoke a named PrefabAction on a placed instance (game-logic entry). */
   | { type: "callPrefabAction"; entityId: string; actionId: string }
   /** Replace a destroyed object with its pieces — each a pickable ingredient
