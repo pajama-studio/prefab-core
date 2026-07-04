@@ -38,7 +38,10 @@ export interface Components {
   /** Dish hygiene: dirty items render `dirtyModel` and become clean after
    *  `washSec` seconds spent inside a water-holding container (sink basin). */
   washable?: { dirty: boolean; washSec: number; elapsedSec?: number; dirtyModel?: string };
-  holder?: { capacity: number; held: string[]; dish?: string; inside?: boolean; initialHeld?: string[] };
+  /** `slots`: optional fixed local-space seat positions (e.g. egg-carton cells).
+   *  When present, held items sit at slots[i] (scaled/rotated with the holder)
+   *  instead of the default golden-ratio spread. */
+  holder?: { capacity: number; held: string[]; dish?: string; inside?: boolean; initialHeld?: string[]; slots?: { x: number; y: number; z: number }[] };
   timer?: { durationSec: number; elapsedSec: number; onComplete: string };
   stateful?: { current: string; states: { key: string; tint: string; badge?: string }[] };
   /** A toggleable appliance (stove/oven/fryer). When `on`, it shows flames and

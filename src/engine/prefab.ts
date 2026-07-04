@@ -26,12 +26,28 @@ export { SEP, instanceEntityId, parseInstanceId };
  *  target is prefab-local — scope it to the instance. */
 const KITCHEN_OPTS: ExpandOptions<Components> = {
   remapComponentRefs: (components, mapId) => {
-    const controls = components.appliance?.knob?.controls;
-    if (!controls) return components;
-    return {
-      ...components,
-      appliance: { ...components.appliance!, knob: { ...components.appliance!.knob!, controls: mapId(controls) } },
-    };
+    let out = components;
+    const controls = out.appliance?.knob?.controls;
+    if (controls) {
+      out = {
+        ...out,
+        appliance: { ...out.appliance!, knob: { ...out.appliance!.knob!, controls: mapId(controls) } },
+      };
+    }
+    // Holder held/initialHeld reference prefab-local item entities (e.g. eggs
+    // pre-stocked in an egg box) — scope them to the instance like knob.controls.
+    const h = out.holder;
+    if (h && (h.held.length || h.initialHeld?.length)) {
+      out = {
+        ...out,
+        holder: {
+          ...h,
+          held: h.held.map(mapId),
+          ...(h.initialHeld ? { initialHeld: h.initialHeld.map(mapId) } : {}),
+        },
+      };
+    }
+    return out;
   },
 };
 
