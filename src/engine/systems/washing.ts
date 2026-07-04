@@ -1,5 +1,5 @@
-import type { EngineState, Input } from "../types";
-import type { System } from "./cooking";
+import type { EngineState, Input } from "../types.js";
+import type { System } from "./cooking.js";
 
 /**
  * The wash loop: a DIRTY washable item sitting inside a holder that currently

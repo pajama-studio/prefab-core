@@ -1,5 +1,5 @@
-import type { System } from "./cooking";
-import type { EngineState, GameEvent, IngredientReq, Recipe, RuntimeEntity } from "../types";
+import type { System } from "./cooking.js";
+import type { EngineState, GameEvent, IngredientReq, Recipe, RuntimeEntity } from "../types.js";
 
 const COOK_SEC = 4;  // heat to cook the pot's contents
 const BURN_SEC = 9;  // heat to ruin them

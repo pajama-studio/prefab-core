@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { createEngine, step } from "../../engine/engine";
-import type { GameDef } from "../../engine/types";
+import { createEngine, step } from "../../engine/engine.js";
+import type { GameDef } from "../../engine/types.js";
 
 const ASSET = { id: "", slug: "", thumbnailUrl: null, modelUrl: null };
 

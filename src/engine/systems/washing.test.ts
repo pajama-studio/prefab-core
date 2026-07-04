@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { washingSystem } from "./washing";
-import type { EngineState, RuntimeEntity } from "../types";
+import { washingSystem } from "./washing.js";
+import type { EngineState, RuntimeEntity } from "../types.js";
 
 const asset = { id: "", slug: "", thumbnailUrl: null, modelUrl: null };
 const T = { position: { x: 0, y: 0, z: 0 }, rotationY: 0, scale: 1 };

@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { cookingSystem } from "../../engine/systems/cooking";
-import type { EngineState } from "../../engine/types";
+import { cookingSystem } from "../../engine/systems/cooking.js";
+import type { EngineState } from "../../engine/types.js";
 
 function stateWith(active: boolean, elapsedSec = 0): EngineState {
   return {

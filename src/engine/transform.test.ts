@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { composeTransform, worldToLocal, resolveWorldTransform, wouldCycle, IDENTITY } from "./transform";
-import type { Components, Transform } from "./types";
+import { composeTransform, worldToLocal, resolveWorldTransform, wouldCycle, IDENTITY } from "./transform.js";
+import type { Components, Transform } from "./types.js";
 
 const T = (x: number, y: number, z: number, rotationY = 0, scale = 1): Transform =>
   ({ position: { x, y, z }, rotationY, scale });

@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
-import { expandPrefabInstance, remapPrefabTriggers, parseInstanceId, expandEntities, collectInstanceTriggers } from "./prefab";
-import { resolveWorldTransform } from "./transform";
-import type { EntityDef, Prefab, Transform } from "./types";
+import { expandPrefabInstance, remapPrefabTriggers, parseInstanceId, expandEntities, collectInstanceTriggers } from "./prefab.js";
+import { resolveWorldTransform } from "./transform.js";
+import type { EntityDef, Prefab, Transform } from "./types.js";
 
 const T = (x: number, y: number, z: number, rotationY = 0, scale = 1): Transform =>
   ({ position: { x, y, z }, rotationY, scale });

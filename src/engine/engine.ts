@@ -1,15 +1,15 @@
-import type { EngineState, GameDef, GameEvent, Input, Prefab, RuntimeEntity } from "./types";
-import { expandEntities } from "./prefab";
-import { inputSystem } from "./systems/input";
-import { interactSystem } from "./systems/interact";
-import { cookingSystem, type System } from "./systems/cooking";
-import { cookingPotSystem } from "./systems/cookingPot";
-import { washingSystem } from "./systems/washing";
-import { timerSystem } from "./systems/timer";
-import { stateSystem } from "./systems/state";
-import { fluidSystem } from "./systems/fluid";
-import { prefabActionSystem } from "./systems/prefabAction";
-import { triggerSystem } from "./systems/trigger";
+import type { EngineState, GameDef, GameEvent, Input, Prefab, RuntimeEntity } from "./types.js";
+import { expandEntities } from "./prefab.js";
+import { inputSystem } from "./systems/input.js";
+import { interactSystem } from "./systems/interact.js";
+import { cookingSystem, type System } from "./systems/cooking.js";
+import { cookingPotSystem } from "./systems/cookingPot.js";
+import { washingSystem } from "./systems/washing.js";
+import { timerSystem } from "./systems/timer.js";
+import { stateSystem } from "./systems/state.js";
+import { fluidSystem } from "./systems/fluid.js";
+import { prefabActionSystem } from "./systems/prefabAction.js";
+import { triggerSystem } from "./systems/trigger.js";
 
 // triggerSystem runs last so it sees the events emitted by the other systems.
 export const SYSTEMS: System[] = [inputSystem, interactSystem, cookingSystem, cookingPotSystem, washingSystem, timerSystem, stateSystem, fluidSystem, prefabActionSystem, triggerSystem];

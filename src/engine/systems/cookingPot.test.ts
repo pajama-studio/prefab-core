@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
-import { createEngine, step } from "../../engine/engine";
-import { createDefaultGameDef } from "../../engine/defaults";
-import type { GameDef } from "../../engine/types";
+import { createEngine, step } from "../../engine/engine.js";
+import { createDefaultGameDef } from "../../engine/defaults.js";
+import type { GameDef } from "../../engine/types.js";
 
 /** A pot holding a tomato + egg, on the heat, with a known recipe. */
 function potDef(): GameDef {

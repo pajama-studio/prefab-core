@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { validateGameDef } from "../engine/validate";
-import { createDefaultGameDef } from "../engine/defaults";
+import { validateGameDef } from "../engine/validate.js";
+import { createDefaultGameDef } from "../engine/defaults.js";
 
 describe("validateGameDef", () => {
   it("accepts a default def", () => {

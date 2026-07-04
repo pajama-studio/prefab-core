@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { createEngine, step } from "../../engine/engine";
-import { createDefaultGameDef } from "../../engine/defaults";
+import { createEngine, step } from "../../engine/engine.js";
+import { createDefaultGameDef } from "../../engine/defaults.js";
 
 describe("inputSystem", () => {
   it("toggleAppliance flips an entity's appliance on/off", () => {

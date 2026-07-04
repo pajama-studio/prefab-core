@@ -1,4 +1,4 @@
-import type { GameDef } from "./types";
+import type { GameDef } from "./types.js";
 
 /** Upgrade any entity using the legacy grid `{x,y}` transform to the 3D transform.
  *  Pure: returns a new def object; non-matching entities pass through unchanged. */

@@ -1,4 +1,4 @@
-import type { Components, EntityDef, Prefab, Trigger } from "./types";
+import type { Components, EntityDef, Prefab, Trigger } from "./types.js";
 import {
   SEP,
   instanceEntityId,

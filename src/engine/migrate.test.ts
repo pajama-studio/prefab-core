@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { migrateDef } from "../engine/migrate";
+import { migrateDef } from "../engine/migrate.js";
 
 describe("migrateDef", () => {
   it("upgrades an old {x,y} transform to position/rotationY/scale using cellSize", () => {

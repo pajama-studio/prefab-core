@@ -1,4 +1,4 @@
-import type { GameDef } from "./types";
+import type { GameDef } from "./types.js";
 
 export function validateGameDef(
   value: unknown,

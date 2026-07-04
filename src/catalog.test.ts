@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { COMPONENT_CATALOG, ACTION_CATALOG } from "./catalog";
+import { COMPONENT_CATALOG, ACTION_CATALOG } from "./catalog.js";
 
 describe("agent catalog", () => {
   it("every component has a non-trivial doc", () => {

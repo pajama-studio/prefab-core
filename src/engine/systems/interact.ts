@@ -1,5 +1,5 @@
-import type { System } from "./cooking";
-import type { Components, RuntimeEntity } from "../types";
+import type { System } from "./cooking.js";
+import type { Components, RuntimeEntity } from "../types.js";
 
 const POINTS_PER_DISH = 100;
 

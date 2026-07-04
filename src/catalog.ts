@@ -1,4 +1,4 @@
-import type { Components, TriggerAction } from "./engine/types";
+import type { Components, TriggerAction } from "./engine/types.js";
 
 /**
  * Agent Catalog — machine-readable semantics for every building block.

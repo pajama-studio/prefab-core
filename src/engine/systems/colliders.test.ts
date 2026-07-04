@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { resolveColliderKind } from "./colliders";
-import type { Components } from "../types";
+import { resolveColliderKind } from "./colliders.js";
+import type { Components } from "../types.js";
 
 const e = (components: Components) => ({ components });
 const ING = { ingredient: { type: "tomato", state: "whole" } } as Components; // pickable by default

@@ -1,5 +1,5 @@
-import type { Components } from "../types";
-import { isPickable } from "./interact";
+import type { Components } from "../types.js";
+import { isPickable } from "./interact.js";
 
 /** The concrete collider shapes Rapier builds (no "auto" — that's resolved). */
 export type ColliderKind = "cuboid" | "hull" | "trimesh" | "compound";

@@ -1,4 +1,4 @@
-import type { EngineState, GameEvent, Input } from "../types";
+import type { EngineState, GameEvent, Input } from "../types.js";
 
 export interface System {
   id: string;

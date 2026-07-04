@@ -1,6 +1,6 @@
-import type { GameDef, GameEvent, RuntimeEntity, TriggerAction } from "../types";
-import { resolveDish } from "./cookingPot";
-import { instanceEntityId } from "../prefab";
+import type { GameDef, GameEvent, RuntimeEntity, TriggerAction } from "../types.js";
+import { resolveDish } from "./cookingPot.js";
+import { instanceEntityId } from "../prefab.js";
 
 /**
  * The single executor for TriggerActions — shared by the trigger system

@@ -1,8 +1,8 @@
 import { describe, it, expect } from "vitest";
-import { inputSystem } from "../../engine/systems/input";
-import { timerSystem } from "../../engine/systems/timer";
-import { stateSystem } from "../../engine/systems/state";
-import type { EngineState } from "../../engine/types";
+import { inputSystem } from "../../engine/systems/input.js";
+import { timerSystem } from "../../engine/systems/timer.js";
+import { stateSystem } from "../../engine/systems/state.js";
+import type { EngineState } from "../../engine/types.js";
 
 const base = (entities: EngineState["entities"]): EngineState => ({
   def: { id: "t", name: "t", version: 1, grid: { cols: 1, rows: 1, cellSize: 1 }, sim: { tickMs: 50 }, entities: [], recipes: [] },

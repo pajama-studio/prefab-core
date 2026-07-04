@@ -1,8 +1,8 @@
 import { describe, it, expect } from "vitest";
-import { createEngine, step } from "../../engine/engine";
-import { createDefaultGameDef } from "../../engine/defaults";
-import { POUR_RATE } from "./fluid";
-import type { EntityDef, GameDef, Transform } from "../../engine/types";
+import { createEngine, step } from "../../engine/engine.js";
+import { createDefaultGameDef } from "../../engine/defaults.js";
+import { POUR_RATE } from "./fluid.js";
+import type { EntityDef, GameDef, Transform } from "../../engine/types.js";
 
 const T = (x: number, y: number, z: number, scale = 1): Transform =>
   ({ position: { x, y, z }, rotationY: 0, scale });

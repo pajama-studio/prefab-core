@@ -1,5 +1,5 @@
-import type { System } from "./cooking";
-import type { GameEvent } from "../types";
+import type { System } from "./cooking.js";
+import type { GameEvent } from "../types.js";
 
 export const timerSystem: System = {
   id: "timer",

@@ -1,6 +1,6 @@
-import type { System } from "./cooking";
-import type { GameEvent } from "../types";
-import { cutState, getIngredient } from "../../game/ingredients";
+import type { System } from "./cooking.js";
+import type { GameEvent } from "../types.js";
+import { cutState, getIngredient } from "../../game/ingredients.js";
 
 const EMPTY_ASSET = { id: "", slug: "", thumbnailUrl: null, modelUrl: null };
 

@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
-import { createEngine, step } from "../engine/engine";
-import { createDefaultGameDef } from "../engine/defaults";
-import type { GameDef } from "../engine/types";
+import { createEngine, step } from "../engine/engine.js";
+import { createDefaultGameDef } from "../engine/defaults.js";
+import type { GameDef } from "../engine/types.js";
 
 /** A self-contained def with one cookable entity (decoupled from the default). */
 function cookableDef(): GameDef {

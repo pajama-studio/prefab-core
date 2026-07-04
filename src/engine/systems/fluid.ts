@@ -1,5 +1,5 @@
-import type { RuntimeEntity } from "../types";
-import type { System } from "./cooking";
+import type { RuntimeEntity } from "../types.js";
+import type { System } from "./cooking.js";
 
 /**
  * Fluid system — a running `fluidSource` (faucet) fills the `fillable`

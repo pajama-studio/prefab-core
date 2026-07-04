@@ -1,4 +1,4 @@
-import type { GameDef } from "./types";
+import type { GameDef } from "./types.js";
 
 const EMPTY_ASSET = { id: "", slug: "", thumbnailUrl: null, modelUrl: null };
 

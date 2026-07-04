@@ -1,6 +1,6 @@
-import type { System } from "./cooking";
-import type { EngineState, GameEvent, TriggerWhen } from "../types";
-import { applyTriggerAction } from "./actions";
+import type { System } from "./cooking.js";
+import type { EngineState, GameEvent, TriggerWhen } from "../types.js";
+import { applyTriggerAction } from "./actions.js";
 
 function matches(when: TriggerWhen, events: GameEvent[], score: number): boolean {
   switch (when.kind) {

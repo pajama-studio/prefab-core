@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { createDefaultGameDef } from "../engine/defaults";
+import { createDefaultGameDef } from "../engine/defaults.js";
 
 describe("createDefaultGameDef", () => {
   it("has a stove station and a raw ingredient to experiment with", () => {

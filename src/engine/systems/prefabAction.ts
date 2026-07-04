@@ -1,5 +1,5 @@
-import type { System } from "./cooking";
-import { applyTriggerAction } from "./actions";
+import type { System } from "./cooking.js";
+import { applyTriggerAction } from "./actions.js";
 
 /**
  * Executes `callPrefabAction` inputs — the game-logic entry point for the

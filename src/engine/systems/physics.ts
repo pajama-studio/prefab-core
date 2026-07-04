@@ -1,5 +1,5 @@
-import type { Components } from "../types";
-import { isPickable } from "./interact";
+import type { Components } from "../types.js";
+import { isPickable } from "./interact.js";
 
 /** How an entity is simulated in play. */
 export type PhysicsMode = "dynamic" | "fixed" | "none";
