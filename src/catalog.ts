@@ -35,7 +35,7 @@ export const COMPONENT_CATALOG = {
   appliance: { doc: "On/off machine (stove burner, mixer). Heat sources drive cookables above them.", verbs: ["toggle"] },
   vfx: { doc: "A particle effect anchor (flames, steam, sparkle) toggled by gameplay.", verbs: [] },
   fluidSource: { doc: "Emits liquid while on (faucet). rate/jetSize/grain/cohesion/splash/jetSpeed/shadeMode tune sim + look.", verbs: ["turn-on", "turn-off"], invariants: ["fills the highest fillable in the column below (catchTarget)"] },
-  fillable: { doc: "Holds liquid up to capacity; level rises under a source. pouring:true drains it into the fillable below.", verbs: ["fill", "pour"], invariants: ["pour conserves volume source→target", "pouring auto-stops at level 0", "crossing capacity emits `filled` once"] },
+  fillable: { doc: "Holds liquid up to capacity; level rises under a source. Optional voxels/overflowSurface describe fluid collider and spill catch geometry.", verbs: ["fill", "pour"], invariants: ["pour conserves volume source→target", "pouring auto-stops at level 0", "crossing capacity emits `filled` once"] },
   light: { doc: "A point light (color + intensity) — fridge interiors, hood lamps.", verbs: [] },
   sliceable: { doc: "Cuttable along an axis at an offset; `cut` marks the separation done.", verbs: ["cut"] },
   ingredient: { doc: "Food item with a prep state machine (whole → cut → diced; any stage → cooked → burnt). See game/ingredients catalog.", verbs: ["cut", "cook"] },

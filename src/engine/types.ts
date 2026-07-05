@@ -99,6 +99,9 @@ export interface Components {
     /** Solid occupancy voxels (base64 bitfield): solid cells are not enterable;
      *  open-container interiors remain empty so liquid can pool there. */
     voxels?: { nx: number; ny: number; nz: number; min: number[]; size: number[]; b64: string };
+    /** Fillable-local XZ catch plane for overflow water, with local `y`
+     *  as the floor and optional `rimY` as the height where walls stop containing. */
+    overflowSurface?: { min: [number, number]; max: [number, number]; y: number; rimY?: number };
     /** Rounded-rect fluid collider tuning (world m / scales): offset, size, corner. */
     bowlOx?: number; bowlOz?: number; bowlSx?: number; bowlSz?: number; bowlR?: number;
   };
