@@ -96,7 +96,8 @@ export interface Components {
     pouring?: boolean   /** Optional interior heightfield over the ghost box footprint (row-major
      *  nz×nx, world y) — fluid collides with the REAL bowl surface. */
     heightfield?: { nx: number; nz: number; data: number[] };
-    /** Mesh-shell occupancy voxels (base64 bitfield) for TRUE mesh collision. */
+    /** Solid occupancy voxels (base64 bitfield): solid cells are not enterable;
+     *  open-container interiors remain empty so liquid can pool there. */
     voxels?: { nx: number; ny: number; nz: number; min: number[]; size: number[]; b64: string };
     /** Rounded-rect fluid collider tuning (world m / scales): offset, size, corner. */
     bowlOx?: number; bowlOz?: number; bowlSx?: number; bowlSz?: number; bowlR?: number;

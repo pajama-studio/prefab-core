@@ -1,6 +1,6 @@
 {
   "name": "@pajama-studio/prefab-core",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "General-purpose prefab game runtime: prefab schema, deterministic step() over pluggable system packs, extensible trigger/action dispatch. Domain packs plug in on top.",
   "license": "MIT",
   "type": "module",
